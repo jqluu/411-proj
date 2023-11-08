@@ -26,18 +26,21 @@ class User {
 }
 
 class Post {
-    var user: User
+    // var user: User
+    var name: String
     var item: String
     var location: String
     var time: String
     // var photos: [UIImage]
-
-    init(user: User, item: String, location: String, time: String) {
-        self.user = user
+    
+    init(name: String, item: String, location: String, time: String) {
+        // self.user = user
+        self.name = name
         self.item = item
         self.location = location
         self.time = time
     }
+    
 }
 
 class Group {

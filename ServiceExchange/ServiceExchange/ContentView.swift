@@ -39,7 +39,7 @@ struct ContentView: View {
             LoginView()
                 .tabItem {
                     Image(systemName: "person.circle")
-                    Text("Login")
+                    Text("LoginTest")
                 }
         }
     }
