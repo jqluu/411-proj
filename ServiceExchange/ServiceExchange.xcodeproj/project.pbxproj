@@ -18,6 +18,7 @@
 		32B551832AFC192A0004A738 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B551822AFC192A0004A738 /* models.swift */; };
 		32B551852AFC1BC60004A738 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B551842AFC1BC60004A738 /* LoginView.swift */; };
 		32B551872AFC1D010004A738 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B551862AFC1D010004A738 /* SignUpView.swift */; };
+		32D616912AFC27960092F9AE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 32D616902AFC27960092F9AE /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		32B551822AFC192A0004A738 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		32B551842AFC1BC60004A738 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		32B551862AFC1D010004A738 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		32D616902AFC27960092F9AE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				32B5516A2AFC0A6C0004A738 /* ContentView.swift */,
 				32B5516C2AFC0A6E0004A738 /* Assets.xcassets */,
 				32B5516E2AFC0A6E0004A738 /* Preview Content */,
+				32D616902AFC27960092F9AE /* .gitignore */,
 			);
 			path = ServiceExchange;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32B551702AFC0A6E0004A738 /* Preview Assets.xcassets in Resources */,
+				32D616912AFC27960092F9AE /* .gitignore in Resources */,
 				32B5516D2AFC0A6E0004A738 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
