@@ -7,9 +7,35 @@
 
 import SwiftUI
 
+var testGroups: [Group] = [
+    Group(name: "CSUF", members: []),
+    Group(name: "Nutwood Neighborhood", members: [])
+]
+
+// Displaying posts
+struct GroupListView: View {
+    var groups: [Group] // Input
+    
+    var body: some View {
+        NavigationView {
+            List(groups, id: \.name) { group in
+                VStack(alignment: .leading) {
+                    Text(group.name)
+                        .font(.headline)
+                    
+                    Text("Members: \(group.members.count)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            .navigationBarTitle("Groups:")
+        }
+    }
+}
+
 struct GroupView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GroupListView(groups: testGroups)
     }
 }
 
