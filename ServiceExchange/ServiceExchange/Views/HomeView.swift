@@ -7,18 +7,11 @@
 
 import SwiftUI
 
-// test Posts
-var testPosts: [Post] = [
-    Post(name: "John", item: "Tutoring", location: "Library", time: "10AM"),
-    Post(name: "Bob", item: "Chores", location: "Library", time: "10AM"),
-    Post(name: "Mary", item: "Extra food", location: "Library", time: "10AM")
-    
-]
 
 // displaying posts
 struct PostListView: View {
     
-    var posts: [Post] // input
+    @State var posts: [Post] = []// input
     
     @State private var isShowingCreatePostView = false
     
@@ -47,13 +40,16 @@ struct PostListView: View {
                         )
                         .sheet(isPresented: $isShowingCreatePostView) {
                             NavigationView {
-                                CreatePostView()
+                                CreatePostView(posts: self.$posts)
                             }
                         }
             
             
         }
     }
+    func addPost(_ newPost: Post) {
+            posts.append(newPost)
+        }
 }
 
 // create a post view
@@ -65,6 +61,7 @@ struct CreatePostView: View {
     @State private var time = ""
     @State private var description = ""
     @State private var showAlert = false
+    @Binding var posts: [Post]
     
     var body: some View {
             VStack(spacing: 16) {
@@ -101,6 +98,8 @@ struct CreatePostView: View {
                 
                 Button("Save") {
                     // Logic to save the post
+                    let newPost = Post(name: postTitle, item: postContent, location: location, time: time)
+                    posts.append(newPost)
                     presentationMode.wrappedValue.dismiss()
                 }
                 .frame(maxWidth: .infinity)
@@ -125,14 +124,14 @@ struct CreatePostView: View {
 // main home view
 struct HomeView: View {
     var body: some View {
-        PostListView(posts: testPosts) // pass in input
+        PostListView() // pass in input
     }
 }
 
 // preview
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        PostListView(posts: testPosts)
+        PostListView()
     }
 }
 
