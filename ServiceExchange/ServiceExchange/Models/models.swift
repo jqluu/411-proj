@@ -43,6 +43,24 @@ class Post {
     
 }
 
+class Request: Identifiable, Hashable {
+    var user: User
+    var post: Post
+    
+    init(user: User, post: Post) {
+        self.user = user
+        self.post = post
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self).hashValue)
+    }
+    
+    static func == (lhs: Request, rhs: Request) -> Bool {
+        return lhs === rhs
+    }
+}
+
 class Group {
     var name: String
     var members: [User]
