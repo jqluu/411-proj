@@ -1,6 +1,6 @@
 import SwiftUI
 
-
+// Make sure all your models conform to Codable
 // requests
 // clicking on request -> show contact information
 struct RequestListView: View {
@@ -37,17 +37,29 @@ struct RequestListView: View {
 
 // test
 struct ExchangeView: View {
-    var user1 = User(name: "John Doe", email: "john@example.com", phoneNumber: "1234567890", exchangesCount: 5, averageRating: 4.5)
-    var user2 = User(name: "Alice Smith", email: "alice@example.com", phoneNumber: "9876543210", exchangesCount: 8, averageRating: 4.8)
-    var post1 = Post(name: "John", item: "Tutoring", location: "Library", time: "10 AM")
-    var post2 = Post(name: "Alice", item: "Chores", location: "Home", time: "2 PM")
-    var requests: [Request]
+    @AppStorage("requests") private var requestData: Data = Data()
+
+    var requests: [Request] {
+        get {
+            (try? JSONDecoder().decode([Request].self, from: requestData)) ?? []
+        }
+        set {
+            requestData = (try? JSONEncoder().encode(newValue)) ?? Data()
+        }
+    }
     
     init() {
-        requests = [
-            Request(user: user1, post: post1),
-            Request(user: user2, post: post2)
-        ]
+        // If requests is empty, initialize with default data
+        if requests.isEmpty {
+            let user1 = User(name: "John Doe", email: "john@example.com", phoneNumber: "1234567890", exchangesCount: 5, averageRating: 4.5)
+            let user2 = User(name: "Alice Smith", email: "alice@example.com", phoneNumber: "9876543210", exchangesCount: 8, averageRating: 4.8)
+            let post1 = Post(name: "John", item: "Tutoring", location: "Library", time: "10 AM")
+            let post2 = Post(name: "Alice", item: "Chores", location: "Home", time: "2 PM")
+            requests = [
+                Request(user: user1, post: post1),
+                Request(user: user2, post: post2)
+            ]
+        }
     }
     
     var body: some View {

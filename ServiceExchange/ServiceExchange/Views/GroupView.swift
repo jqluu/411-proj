@@ -7,15 +7,19 @@
 
 import SwiftUI
 
-var testGroups: [Group] = [
-    Group(name: "CSUF", members: []),
-    Group(name: "Nutwood Neighborhood", members: [])
-]
 
-// Displaying posts
 struct GroupListView: View {
-    var groups: [Group] // Input
+    @AppStorage("groups") var groupData: Data = Data()
     
+    var groups: [Group] {
+        get {
+            (try? JSONDecoder().decode([Group].self, from: groupData)) ?? []
+        }
+        set {
+            groupData = (try? JSONEncoder().encode(newValue)) ?? Data()
+        }
+    }
+
     var body: some View {
         NavigationView {
             List(groups, id: \.name) { group in
@@ -35,7 +39,7 @@ struct GroupListView: View {
 
 struct GroupView: View {
     var body: some View {
-        GroupListView(groups: testGroups)
+        GroupListView()
     }
 }
 

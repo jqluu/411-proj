@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @AppStorage("storedUsername") private var storedUsername = ""
+    @AppStorage("storedPassword") private var storedPassword = ""
+
     @State private var username = ""
     @State private var password = ""
     
@@ -32,10 +35,7 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 Button(action: {
-                    // Add your authentication logic here
-                    // Check if the username and password are valid
-                    // If valid, navigate to the next view
-                    // If not, show an error message
+                    authenticateUser(username: username, password: password)
                 }) {
                     Text("Login")
                         .font(.title)
@@ -46,7 +46,6 @@ struct LoginView: View {
                         .cornerRadius(10)
                 }
                 
-                
                 NavigationLink(destination: SignUpView()) {
                     Text("Don't have an account? Sign up")
                         .foregroundColor(.blue)
@@ -54,6 +53,16 @@ struct LoginView: View {
                 
                 Spacer()
             }
+        }
+    }
+
+    private func authenticateUser(username: String, password: String) {
+        if username == storedUsername && password == storedPassword {
+            // Login successful
+            print("Login Successful")
+        } else {
+            // Login failed
+            print("Invalid credentials")
         }
     }
 }

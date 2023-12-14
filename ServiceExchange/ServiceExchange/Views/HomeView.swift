@@ -7,18 +7,17 @@
 
 import SwiftUI
 
-
 // displaying posts
 struct PostListView: View {
-    
-    @State var posts: [Post] = []// input
+    @State private var posts: [Post] = []
     
     @State private var isShowingCreatePostView = false
+    
     
     var body: some View {
         NavigationView {
             // test list
-            List(posts, id: \.item) { post in
+            List(posts) { post in
                 VStack(alignment: .leading) {
                     Text("User: \(post.name)")
                         .font(.headline)
@@ -32,24 +31,24 @@ struct PostListView: View {
             }
             .navigationBarTitle("Offers:")
             .navigationBarItems(trailing:
-                            Button(action: {
-                                isShowingCreatePostView.toggle()
-                            }) {
-                                Image(systemName: "plus")
-                            }
-                        )
-                        .sheet(isPresented: $isShowingCreatePostView) {
-                            NavigationView {
-                                CreatePostView(posts: self.$posts)
-                            }
-                        }
-            
-            
+                Button(action: {
+                    isShowingCreatePostView.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
+            .sheet(isPresented: $isShowingCreatePostView) {
+                NavigationView {
+                    CreatePostView(posts: $posts)
+                }
+            }
         }
     }
+    
     func addPost(_ newPost: Post) {
-            posts.append(newPost)
-        }
+        var updatedPosts: [Post] = self.posts
+        updatedPosts.append(newPost)
+    }
 }
 
 // create a post view
@@ -124,17 +123,16 @@ struct CreatePostView: View {
 // main home view
 struct HomeView: View {
     var body: some View {
-        PostListView() // pass in input
-    }
-}
-
-// preview
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
         PostListView()
     }
 }
 
+// Preview
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}
 
 
 

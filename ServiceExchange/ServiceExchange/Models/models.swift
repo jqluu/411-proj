@@ -8,7 +8,7 @@
 import Foundation
 
 
-class User {
+class User: Codable {
     var name: String
     var email: String
     var phoneNumber: String
@@ -25,7 +25,7 @@ class User {
     }
 }
 
-class Post {
+class Post: Codable, Identifiable {
     // var user: User
     var name: String
     var item: String
@@ -43,7 +43,7 @@ class Post {
     
 }
 
-class Request: Identifiable, Hashable {
+class Request:Codable, Identifiable, Hashable {
     var user: User
     var post: Post
     
@@ -61,7 +61,7 @@ class Request: Identifiable, Hashable {
     }
 }
 
-class Group {
+class Group:Codable {
     var name: String
     var members: [User]
 

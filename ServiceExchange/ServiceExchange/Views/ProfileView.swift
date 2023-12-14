@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-var testProfilePosts: [Post] = [
-    Post(name: "John", item: "Tutoring", location: "Library", time: "10AM"),
-    
-]
-
 struct ProfileView: View {
+    @AppStorage("profilePosts") private var profilePostsData: Data = Data()
+    
+    var profilePosts: [Post] {
+        get {
+            (try? JSONDecoder().decode([Post].self, from: profilePostsData)) ?? []
+        }
+        set {
+            profilePostsData = (try? JSONEncoder().encode(newValue)) ?? Data()
+        }
+    }
     var body: some View {
         ScrollView {
             VStack {
@@ -64,7 +69,7 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                PostListView(posts: testProfilePosts)
+                 PostListView()
             }
         }
         .navigationBarTitle("Profile")
